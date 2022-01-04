@@ -42,11 +42,18 @@ module.exports = merge(common, {
               implementation: require('sass'),
             },
           },
+          {
+            test: /\.tsx?$/,
+            use: 'ts-loader',
+            exclude: /node_modules/,
+          },
         ],
       },
     ],
   },
-
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
   optimization: {
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
     runtimeChunk: 'single',
