@@ -10,6 +10,11 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       // Styles
       {
         test: /\.(s?css)$/,
@@ -39,7 +44,9 @@ module.exports = merge(common, {
       },
     ],
   },
-
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
   output: {
     publicPath: '/',
   },

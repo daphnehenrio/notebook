@@ -8,7 +8,7 @@ module.exports = {
     // SCSS
     paths.src + '/styles/index.scss',
     // JS
-    paths.src + '/index.js',
+    paths.src + '/index.tsx',
   ],
 
   resolve: {
