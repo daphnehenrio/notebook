@@ -1,10 +1,10 @@
 // ? Import npm
-import React from 'react';
+import * as React from 'react';
 import { render } from 'react-dom';
 
 // ? Import local
 // Composants
-import App from 'src/components/App';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 render(
