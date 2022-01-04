@@ -4,14 +4,14 @@ import { render } from 'react-dom';
 
 // ? Import local
 // Composants
-import App from 'src/components/App';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function

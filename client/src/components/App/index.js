@@ -1,10 +1,12 @@
 // ? Import NPM
 import React from 'react';
 
+// ? Import Local
+// | Components
+import MenuAppBar from '../MenuAppBar';
+
 const App = () => (
-  <>
-    Hello world
-  </>
+  <MenuAppBar />
 );
 
 export default App;
