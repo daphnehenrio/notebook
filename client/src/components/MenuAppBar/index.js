@@ -17,6 +17,8 @@ import {
 // | Components
 import Drawer from './Drawer';
 import UserAccount from './UserAccount';
+import Editor from '../Editor';
+
 // | Stlyed Components
 import { Main, AppBar } from '../StyledComponents';
 
@@ -55,7 +57,7 @@ const MenuAppBar = () => {
       </AppBar>
       <Drawer open={open} handleDrawerClose={handleDrawerClose} />
       <Main open={open}>
-        Hello World
+        <Editor />
       </Main>
     </Box>
   );
