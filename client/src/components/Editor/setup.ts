@@ -2,29 +2,34 @@ import data from './data';
 
 const { buttons } = data;
 
+import { Editor } from 'tinymce';
+
 const addButton = (
-  editor,
-  buttonName,
-  buttonText,
-  buttonTooltip,
-  buttonShortcut,
-  buttonOnAction,
-) => {
+  editor: Editor,
+  buttonName: string,
+  buttonText: string,
+  buttonTooltip: string | undefined,
+  buttonOnAction: Function,
+): void => {
   editor.ui.registry.addButton(buttonName, {
     text: buttonText,
     tooltip: buttonTooltip,
-    shortcut: buttonShortcut,
     onAction: () => buttonOnAction(editor),
   });
 };
 
-const addShortcut = (editor, buttonShortcut, buttonText, buttonOnAction) => {
+const addShortcut = (
+  editor: Editor,
+  buttonShortcut: string,
+  buttonText: string,
+  buttonOnAction: Function,
+): void => {
   editor.addShortcut(buttonShortcut, buttonText, () => {
     buttonOnAction(editor);
   });
 };
 
-export default (editor) => {
+export default (editor: Editor) => {
   buttons.forEach((button) => {
     const {
       name, text, tooltip, shortcut, onAction,
@@ -32,6 +37,6 @@ export default (editor) => {
     if (shortcut) {
       addShortcut(editor, shortcut, text, onAction);
     }
-    addButton(editor, name, text, tooltip, shortcut, onAction);
+    addButton(editor, name, text, tooltip, onAction);
   });
 };
