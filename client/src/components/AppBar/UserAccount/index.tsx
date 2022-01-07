@@ -1,6 +1,6 @@
 // ? Import NPM
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+
 // | Material Components
 import {
   FormControlLabel,
@@ -16,14 +16,21 @@ import {
   AccountCircle,
 } from '@mui/icons-material';
 
-const UserAccount = ({ auth, setAuth }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
+// ? PropTypes
+type Props = {
+  auth: boolean;
+  setAuth: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-  const handleChange = (event) => {
+// ? Component Definition
+const UserAccount = ({ auth, setAuth }: Props) => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleChange = (event: any) => {
     setAuth(event.target.checked);
   };
 
-  const handleMenu = (event) => {
+  const handleMenu = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -82,9 +89,5 @@ const UserAccount = ({ auth, setAuth }) => {
   );
 };
 
+// ? Export
 export default UserAccount;
-
-UserAccount.propTypes = {
-  auth: PropTypes.bool.isRequired,
-  setAuth: PropTypes.func.isRequired,
-};

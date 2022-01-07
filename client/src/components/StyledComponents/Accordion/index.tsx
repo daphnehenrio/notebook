@@ -1,5 +1,5 @@
 // ? Import NPM
-import React from 'react';
+import * as React from 'react';
 
 // | Material Components
 import {
@@ -10,14 +10,14 @@ import {
 
 // | Material Icons
 import {
-  ArrowForwardIosSharp as ArrowForwardIosSharpIcon,
+  ExpandMore as ExpandMoreIcon,
 } from '@mui/icons-material';
 
 // | Material Styles
 import { styled } from '@mui/material/styles';
 
 export const Accordion = styled((props) => (
-  <MuiAccordion disableGutters elevation={0} square {...props} />
+  <MuiAccordion children={''} disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
   border: 'none',
   borderLeft: `1px solid ${theme.palette.divider}`,
@@ -29,7 +29,7 @@ export const Accordion = styled((props) => (
 
 export const AccordionSummary = styled((props) => (
   <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '1rem' }} />}
+    expandIcon={<ExpandMoreIcon sx={{ fontSize: '1rem' }} />}
     {...props}
   />
 ))(({ theme }) => ({
