@@ -20,6 +20,11 @@ import { DocumentInterface } from '../../../interfaces'
 import { ListItemIcon } from '../../StyledComponents';
 
 // ? Function Definition
+/**
+ * @description This function is used create menu arborescence with documents only
+ * @param documents Array ➡️ Array with the Documents datas.
+ * @returns         Array ➡️ Array with the components’ construction of menu arborescence for documents.
+ */
 const documentsList: Function = (documents: DocumentInterface[]): React.ReactElement[] => {
   const result: React.ReactElement[] = [];
   documents.forEach((doc: DocumentInterface) => result.push(

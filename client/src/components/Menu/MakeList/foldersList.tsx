@@ -44,6 +44,11 @@ const getSubFoldersOrDocs: Function = (ids: string[], datas: []): listDatasType 
   return result;
 }
 
+/**
+ * @description This function is used create menu arborescence with folders and documents
+ * @param list Array ➡️ Array with the Folders datas.
+ * @returns    Array ➡️ Array with the components’ construction of menu arborescence.
+ */
 const foldersList: Function = (list: FolderInterface[]): React.ReactElement[] => {
   const result: React.ReactElement[] = [];
   
@@ -52,14 +57,17 @@ const foldersList: Function = (list: FolderInterface[]): React.ReactElement[] =>
       id, name, childrensId, documentsId,
     } = folder;
 
+    const hasSubFolder = childrensId && childrensId.length > 0;
+    const hasDocuments = documentsId && documentsId.length > 0;
+
     // FIXME: How set optional chaining => `childrensId?.length`
     const subFolders: FolderInterface[] | null =
-      childrensId && childrensId.length > 0 
+      hasSubFolder
         ? getSubFoldersOrDocs(childrensId, folders) 
         : null;
   
     const docs: DocumentInterface[] | null =
-      documentsId && documentsId.length > 0 
+      hasDocuments 
         ? getSubFoldersOrDocs(documentsId, documents) 
         : null;
     
@@ -67,7 +75,7 @@ const foldersList: Function = (list: FolderInterface[]): React.ReactElement[] =>
       <Accordion key={id}>
         <AccordionSummary>
           <Typography>
-            <FolderIcon fontSize="small" />{name}
+            <FolderIcon isEmpty={!hasSubFolder && !hasDocuments} fontSize="small" />{name}
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
