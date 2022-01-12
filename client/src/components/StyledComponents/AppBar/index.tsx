@@ -6,6 +6,7 @@ import constants from '../../../constants';
 
 const { drawerWidth } = constants.MenuAppBar;
 
+// | Interfaces
 interface AppBar extends AppBarProps {
   open: boolean;
 }

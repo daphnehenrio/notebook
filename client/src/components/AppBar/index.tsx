@@ -31,8 +31,10 @@ type Props = {
 
 // ? Component Definition
 const AppBar = ({ open, handleDrawerOpen }: Props) => {
+  // ? State
   const [auth, setAuth] = React.useState(true);
 
+  // ? Return
   return (
     <StyledAppBar position="fixed" open={open}>
       <Toolbar>

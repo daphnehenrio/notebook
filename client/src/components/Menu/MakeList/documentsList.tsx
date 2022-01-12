@@ -19,7 +19,7 @@ import { DocumentInterface } from '../../../interfaces'
 // | Styled Components
 import { ListItemIcon } from '../../StyledComponents';
 
-// ? Function Definition
+// ? Functions Definition
 /**
  * @description This function is used create menu arborescence with documents only
  * @param documents Array ➡️ Array with the Documents datas.

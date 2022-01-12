@@ -30,7 +30,7 @@ import foldersList from './MakeList/foldersList';
 // | Stlyed Components
 import { Drawer as StyledDrawer, DrawerHeader } from '../StyledComponents';
 
-// ? PropTypes
+// ? Types
 type Props = {
   open: boolean;
   handleDrawerClose: ButtonProps['onClick'];
@@ -38,11 +38,14 @@ type Props = {
 
 // ? Component Definition
 const Drawer = ({ open, handleDrawerClose }: Props) => {
+  // ? Theme
   const theme = useTheme();
+
+  // ? Data
   const { folders } = data.notebook;
-  console.log(folders);
   const rootFolders = folders.filter((folder: FolderInterface) => folder.root === true);
 
+  // ? Return
   return (
     <StyledDrawer
       variant="persistent"

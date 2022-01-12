@@ -3,10 +3,11 @@ import * as React from 'react';
 import { render } from 'react-dom';
 
 // ? Import local
-// Composants
+// | Composants
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
+// ? Render
 render(
   <React.StrictMode>
     <App />

@@ -16,7 +16,7 @@ import {
   AccountCircle,
 } from '@mui/icons-material';
 
-// ? PropTypes
+// ? Types
 type Props = {
   auth: boolean;
   setAuth: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,8 +24,10 @@ type Props = {
 
 // ? Component Definition
 const UserAccount = ({ auth, setAuth }: Props) => {
+  // ? State
   const [anchorEl, setAnchorEl] = React.useState(null);
 
+  // ? Handlers
   const handleChange = (event: any) => {
     setAuth(event.target.checked);
   };
@@ -38,6 +40,7 @@ const UserAccount = ({ auth, setAuth }: Props) => {
     setAnchorEl(null);
   };
 
+  // ? Return
   return (
     <div id="account">
       {auth && (

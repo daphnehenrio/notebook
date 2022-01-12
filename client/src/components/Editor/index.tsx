@@ -15,16 +15,20 @@ import initialSettings from './settings';
 import setCustomButtons from './setup';
 // | Styles
 import './index.scss';
-
+// | .env
 const TINY_API_KEY = process.env.REACT_APP_TINY_API_KEY;
 
+// ? Component Definition
 const Editor = () => {
+  // ? Constants
   const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+  // ? Handlers
   const handleEditorChange = (e: any) => {
     console.log('Content was updated:', e.target.getContent());
   };
 
+  // ? Plugins Functions
   const save_onsavecallback = (currentEditor: EditorType) => {
     console.log('Content was saved:', currentEditor.getContent());
   };
@@ -53,6 +57,7 @@ const Editor = () => {
     }
   };
 
+  // ? Return
   return (
     <EditorTiny
       apiKey={TINY_API_KEY}
@@ -72,4 +77,5 @@ const Editor = () => {
   );
 };
 
+// ? Export
 export default Editor;

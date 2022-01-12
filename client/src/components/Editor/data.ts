@@ -1,6 +1,10 @@
-import actions from './actions';
+// ? Import NPM
 import { Editor } from 'tinymce';
 
+// ? Import Local
+import actions from './actions';
+
+// ? Export
 export default {
   buttons: [
     {
