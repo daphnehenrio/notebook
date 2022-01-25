@@ -1,5 +1,7 @@
+// ? Import NPM
 import { Editor } from 'tinymce';
 
+// ? Export
 export default {
   addTagAndClassOnSelection: (
     editor: Editor,

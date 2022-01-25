@@ -1,9 +1,20 @@
+// ? Import NPM
+import { Editor } from 'tinymce';
+
+// ? Import Local
 import data from './data';
 
 const { buttons } = data;
 
-import { Editor } from 'tinymce';
-
+// ? Functions definition
+/**
+ * @description Add buttons to the editor
+ * @param editor         Editor
+ * @param buttonName     String   ➡️ Name of the button
+ * @param buttonText     String   ➡️ Text displayed of the button
+ * @param buttonTooltip  String   ➡️ Tooltip of the button
+ * @param buttonOnAction Function ➡️ Function to execute when the button is clicked
+ */
 const addButton = (
   editor: Editor,
   buttonName: string,
@@ -18,6 +29,13 @@ const addButton = (
   });
 };
 
+/**
+ * @description Add shortcuts for buttons
+ * @param editor         Editor
+ * @param buttonShortcut String   ➡️ Key combination for shortcut
+ * @param buttonText     String   ➡️ Text displayed of the button
+ * @param buttonOnAction Function ➡️ Function to execute when the shortcut is pressed
+ */
 const addShortcut = (
   editor: Editor,
   buttonShortcut: string,
@@ -29,6 +47,7 @@ const addShortcut = (
   });
 };
 
+// ? Export
 export default (editor: Editor) => {
   buttons.forEach((button) => {
     const {
