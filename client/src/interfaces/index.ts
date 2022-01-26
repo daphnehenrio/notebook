@@ -14,7 +14,7 @@ export interface FolderInterface {
   name: string;
   root: boolean;
   level: number;
-  parentID?: string;
+  parentId?: string;
   childrensId?: string[] | [];
   documentsId?: string[] | [];
   createdBy?: string; 
