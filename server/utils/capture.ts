@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 
 // ? Function Declaration
 /**
- * 
+ * @description Englobe functions in try catch
  * @param myfunction Function to encapsulate in a try catch
  * @returns Returns a function that will be executed in a try catch block (result or error)
  */

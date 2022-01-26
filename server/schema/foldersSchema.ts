@@ -1,7 +1,7 @@
 // ? Import npm
 import { model, Schema, Types } from 'mongoose';
 
-// Define a schema
+// ? Shema definition
 const foldersSchema = new Schema(
   {
     _id: {

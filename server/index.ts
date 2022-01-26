@@ -4,22 +4,26 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 
 // ? Import Local
+// | DB connection
 import connectDatabase from './db/index';
+// | Router
+import router from './router/index';
 
-// PORT
+// ? Constants declaration
+// | PORT
 const PORT = process.env.PORT || 5000;
 
-// APP
+// | APP
 const app = express();
 
-// Body Parser
+// | Body Parser
 const urlencodedParser = bodyParser.urlencoded({
   extended: true,
 });
 app.use(urlencodedParser);
 app.use(bodyParser.json());
 
-// CORS
+// | CORS
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -28,13 +32,13 @@ app.use((req, res, next) => {
   next();
 });
 
-import router from './router/index';
-
+// | Router
 app.use(router);
 
+// | Listen
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
 });
 
-// BDD Connection
+// | DB Connection
 connectDatabase();

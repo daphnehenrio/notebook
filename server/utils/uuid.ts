@@ -1,5 +1,8 @@
+// ? Import NPM
 import * as short from 'short-uuid';
 
-const translator = short();
+// ? Constants declaration
+const translator = short(); // Defaults to flickrBase58
 
-export const generateUUID = () => translator.generate();
+// ? Export
+export const generateUUID = () => translator.generate(); // Generate a shortened v4 UUID
