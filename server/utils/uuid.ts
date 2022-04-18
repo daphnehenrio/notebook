@@ -5,4 +5,8 @@ import * as short from 'short-uuid';
 const translator = short(); // Defaults to flickrBase58
 
 // ? Export
-export const generateUUID = () => translator.generate(); // Generate a shortened v4 UUID
+/**
+ * @description Generate a shortened v4 UUID
+ * @returns Returns a short uuid
+ */
+export const generateUUID = () => translator.generate();

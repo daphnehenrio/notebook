@@ -5,10 +5,10 @@ import { Request, Response } from 'express';
 // | schemas
 import { Labels, Documents, Folders } from '../schema';
 // | utils
-import { generateUUID } from '../utils/uuid';
+import { generateUUID , progateDeleteUpdate } from '../utils';
 
 // ? Functions utils
-const getModel = (modelName: String) => {
+const getModel = (modelName: String): typeof Labels | typeof Folders | typeof Documents => {
   switch (modelName) {
   case "documents":
     return Documents;
@@ -108,14 +108,17 @@ const mainController = {
     // | Get datas from request to get model
     const modelName = req.params.class;
 
+    console.log(req.body);
+
     // | Get model and update one document from it by id & save previous datas
-    const data = await getModel(modelName)
+    const data: any = await getModel(modelName)
       .findOneAndUpdate({ _id: req.params.id }, {
         ...req.body,
         updatedAt: new Date(),
       })
       .then((response: Response) => {
         if (!response) throw new Error(`${modelName} not found`);
+        console.log(response);
         return response;
       });
 
@@ -139,6 +142,21 @@ const mainController = {
   deleteOne: async (req: Request, res: Response,) => {
     // | Get datas from request to get model
     const modelName = req.params.class;
+    const data: any = await getModel(modelName)
+      .findOne({ _id: req.params.id })
+      .then((response) => {
+        if (!response) throw new Error(`${modelName} not found`);
+        return response;
+      });
+
+      console.log(data, modelName);
+
+    if (modelName === "folders") {
+      if (data.childrensId?.length > 0 || data.documentsId?.length > 0) {
+        throw new Error(`You are not allowed to delete this folder because it contains childrens or documents`);
+      }
+    }
+    await progateDeleteUpdate(modelName, data);
 
     // | Get model and delete one document from it by id & return deleted document
     await getModel(modelName)
@@ -148,6 +166,46 @@ const mainController = {
         res.status(200).json(response);
       });
   },
+  /**
+   * @description Delete all documents of a model
+   * @param req Request
+   * @param res Response
+   * @returns Returns string on successfully deleted all documents of a model
+   */
+  deleteAll : async (req: Request, res: Response,) => {
+    // | Get datas from request to get model
+    const modelName = req.params.class;
+
+    // | Get model and all documents from it
+    const datas: any = await getModel(modelName)
+    .find()
+    .then((response) => {
+      if (!response) throw new Error(`${modelName} not found`);
+      return response;
+    });
+
+    console.log(datas, modelName);
+
+    if (modelName === "folders") {
+      datas.forEach((data: any) => {
+        if (data.childrensId?.length > 0 || data.documentsId?.length > 0) {
+          throw new Error(`You are not allowed to delete this folder because it contains childrens or documents`);
+        }
+      });
+    }
+
+    datas.forEach(async (data: any) => {
+      await progateDeleteUpdate(modelName, data);
+    });
+
+    // | Get model and delete all documents from it
+    await getModel(modelName)
+      .deleteMany({})
+      .then(() => {
+        res.status(200).json("delete all successfully");
+      }
+    );
+  }
 };
 
 // ? Export

@@ -14,9 +14,11 @@ const foldersSchema = new Schema(
     },
     root: {
       type: Boolean,
+      required: true,
     },
     level: {
       type: Number,
+      required: true,
     },
     parentId: {
       type: String,

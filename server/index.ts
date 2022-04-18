@@ -8,6 +8,8 @@ import * as bodyParser from 'body-parser';
 import connectDatabase from './db/index';
 // | Router
 import router from './router/index';
+// | Middlewares
+import sanitizer from './middlewares/sanitizer';
 
 // ? Constants declaration
 // | PORT
@@ -25,12 +27,20 @@ app.use(bodyParser.json());
 
 // | CORS
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept");
+  res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND_URL);
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Credentials', "true");
+
+  if (req.method === "OPTIONS") {
+    res.end();
+    return;
+  }
+
   next();
 });
+
+// | Sanitizer
+app.use(sanitizer);
 
 // | Router
 app.use(router);

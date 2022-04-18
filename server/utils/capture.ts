@@ -15,11 +15,29 @@ const capture = (myfunction: Function) =>
     }
     catch (error) {
       console.error(error);
-      // console.trace(error);
-      res.status(500).send({
-        message: error.message,
-        details: error,
-      });
+      if (error.message.includes('not foud')) {
+        res.status(404).json({
+          message: error.message,
+          details: error,
+        });
+      }
+      else if (error.message.includes('already exists')) {
+        res.status(409).json({
+          message: error.message,
+          details: error,
+        });
+      }
+      else if (error.message.includes('not allowed')) {
+        res.status(405).json({
+          message: error.message,
+          details: error,
+        });
+      } else {
+        res.status(500).json({
+          message: error.message,
+          details: error,
+        });
+      }
     }
   };
 
