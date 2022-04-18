@@ -1,0 +1,18 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 30vh;
+  label {
+    margin-bottom: 0.5rem;
+  }
+  &>div{
+    margin-bottom: 3rem;
+    width: 100%;
+  }
+
+  &>button {
+    width: 100%;
+  }
+}

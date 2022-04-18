@@ -1,24 +1,31 @@
-export interface DocumentInterface {
-  id: string;
-  title: string;
-  content?: string;
-  folderId?: string;
-  labelsIds?: string[];
-  createdBy?: string;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
-}
-
+// ? Folder
 export interface FolderInterface {
-  id: string;
+  _id: string;
   name: string;
   root: boolean;
   level: number;
   parentId?: string;
-  childrensId?: string[] | [];
-  documentsId?: string[] | [];
-  createdBy?: string; 
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
+  childrensId: string[] | [];
+  documentsId: string[] | [];
+  createdAt: Date;
+  updatedAt?: Date;
+}
+// ? Document
+export interface DocumentInterface {
+  _id: string;
+  title: string;
+  content?: string;
+  folderId?: string;
+  labelsId: string[];
+  createdAt: Date;
+  updatedAt?: Date;
 }
 
+// ? Label
+export interface LabelInterface {
+  _id: string;
+  name: string;
+  color?: string;
+  createdAt: Date;
+  updatedAt?: Date;
+}

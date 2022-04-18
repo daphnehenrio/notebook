@@ -1,5 +1,9 @@
 // ? Import NPM
 import * as React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import { actionGetAllLabels } from '../../actions/labels';
+import { actionGetAllDocuments } from '../../actions/documents';
+import { actionGetAllFolders } from '../../actions/folders';
 // | Material Components
 import {
   Box,
@@ -17,8 +21,21 @@ import { Main } from '../StyledComponents';
 
 // ? Component Definition
 const App = () => {
+  const { useEffect, useState } = React;
+  const dispatch = useDispatch();
+  const foldersReady = useSelector((state: any) => state.folders.foldersReady);
+  const documentsReady = useSelector((state: any) => state.documents.documentsReady);
+  const currentDocument = useSelector((state: any) => state.documents.currentDocument);
+  // ? use effect
+  useEffect(() => {
+    dispatch(actionGetAllFolders());
+  }, [!foldersReady]);
+  useEffect(() => {
+    dispatch(actionGetAllDocuments());
+  }, [!documentsReady]);
+
   // ? State
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(true);
 
   // ? Handlers
   const handleDrawerOpen = () => {
@@ -36,7 +53,7 @@ const App = () => {
       <AppBar open={open} handleDrawerOpen={handleDrawerOpen} />
       <Menu open={open} handleDrawerClose={handleDrawerClose} />
       <Main open={open}>
-        <Editor />
+        {currentDocument && <Editor /> }
       </Main>
     </Box>
   )

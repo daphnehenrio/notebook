@@ -1,5 +1,6 @@
 // ? Import NPM
-import * as React from 'react';
+import * as  React from 'react';
+import { useSelector } from 'react-redux';
 
 // | Material Components
 import {
@@ -18,11 +19,8 @@ import {
 import { useTheme } from '@mui/material/styles';
 
 // ? Import Local
-// | Data
-import data from './data';
-
-// | Interfaces
-import { FolderInterface } from '../../interfaces';
+// | Components
+import ToolbarMenu from './ToolbarMenu';
 
 // | Function
 import foldersList from './MakeList/foldersList';
@@ -40,10 +38,11 @@ type Props = {
 const Drawer = ({ open, handleDrawerClose }: Props) => {
   // ? Theme
   const theme = useTheme();
+  const ready = useSelector((state: any) => state.folders.foldersReady);
 
   // ? Data
-  const { folders } = data.notebook;
-  const rootFolders = folders.filter((folder: FolderInterface) => folder.root === true);
+  const folders = useSelector((state: any) => state.folders.allFolders);
+  const documents = useSelector((state: any) => state.documents.allDocuments);
 
   // ? Return
   return (
@@ -58,7 +57,8 @@ const Drawer = ({ open, handleDrawerClose }: Props) => {
           </IconButton>
         </DrawerHeader>
       <Divider />
-      {foldersList(rootFolders)}
+      <ToolbarMenu />
+      {ready && foldersList(folders, documents, 0)}
     </StyledDrawer>
   );
 };

@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 // ? Plugins
 const plugins = [
-  'advlist anchor autolink charmap checklist code codesample',
+  'advlist anchor autolink charmap code codesample',
   'directionality emoticons fullscreen help hr image importcss insertdatetime',
   'link lists media nonbreaking noneditable pagebreak paste preview print',
   'quickbars save searchreplace table template textpattern visualblocks visualchars',
@@ -17,7 +17,7 @@ const contextmenu = 'link image imagetools table';
 const toolbar = 'undo redo | bold italic underline strikethrough | \
 fontselect fontsizeselect formatselect | \
 alignleft aligncenter alignright alignjustify | \
-outdent indent |  numlist bullist checklist| forecolor backcolor removeformat | \
+outdent indent |  numlist bullist | forecolor backcolor removeformat | \
 charmap emoticons | fullscreen  preview save print | \
 insertfile image media template link anchor codesample | kanjiButton furiganaButton insertUsername ltr rtl';
 const toolbar_sticky = true;

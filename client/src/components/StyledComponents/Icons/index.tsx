@@ -9,8 +9,8 @@ import {
 import { styled } from '@mui/material/styles';
 
 // ? Export
-export const FolderIcon = styled(FolderTwoTone)(({ isEmpty }: { isEmpty: boolean }) => ({
-  color: isEmpty ? 'grey' : 'black',
+export const FolderIcon = styled(FolderTwoTone)(({ isempty }: { isempty: string | undefined }) => ({
+  color: isempty ? 'grey' : 'black',
   marginRight: '3px',
   marginBottom: '2px',
 }));

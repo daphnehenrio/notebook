@@ -14,9 +14,6 @@ import {
 } from '@mui/icons-material';
 
 // ? Import Local
-// | Components
-import UserAccount from './UserAccount';
-
 // | Stlyed Components
 import { AppBar as StyledAppBar } from '../StyledComponents';
 
@@ -31,12 +28,10 @@ type Props = {
 
 // ? Component Definition
 const AppBar = ({ open, handleDrawerOpen }: Props) => {
-  // ? State
-  const [auth, setAuth] = React.useState(true);
 
   // ? Return
   return (
-    <StyledAppBar position="fixed" open={open}>
+    <StyledAppBar position="fixed" open={open} >
       <Toolbar>
         <IconButton
           color="inherit"
@@ -47,7 +42,6 @@ const AppBar = ({ open, handleDrawerOpen }: Props) => {
         >
           <MenuIcon />
         </IconButton>
-        <UserAccount auth={auth} setAuth={setAuth} />
       </Toolbar>
     </StyledAppBar>
   );

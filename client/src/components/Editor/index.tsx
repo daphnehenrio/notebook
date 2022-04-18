@@ -1,5 +1,6 @@
 // ? Import NPM
 import * as React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   Editor as EditorTiny,
 } from '@tinymce/tinymce-react';
@@ -9,6 +10,8 @@ import {
 } from 'tinymce';
 
 // ? Import Local
+// | Actions
+import { actionUpdateDocument } from '../../actions/documents';
 // | Settings
 import initialSettings from './settings';
 // | Setup
@@ -21,8 +24,10 @@ const TINY_API_KEY = process.env.REACT_APP_TINY_API_KEY;
 // ? Component Definition
 const Editor = () => {
   // ? Constants
+  const dispatch = useDispatch();
   const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
+  const document = useSelector((state: any) => state.documents.currentDocument);
+  
   // ? Handlers
   const handleEditorChange = (e: any) => {
     console.log('Content was updated:', e.target.getContent());
@@ -31,6 +36,13 @@ const Editor = () => {
   // ? Plugins Functions
   const save_onsavecallback = (currentEditor: EditorType) => {
     console.log('Content was saved:', currentEditor.getContent());
+    dispatch(actionUpdateDocument(
+      document._id,
+      {
+        ...document,
+        content: currentEditor.getContent(),
+      }
+    ))
   };
 
   const filePickerCallback = (callback: Function, value: any, meta: any) => {
@@ -61,7 +73,7 @@ const Editor = () => {
   return (
     <EditorTiny
       apiKey={TINY_API_KEY}
-      initialValue="<p>This is the initial content of the editor</p>"
+      initialValue={document ? document.content : "<p>This is the initial content of the editor</p>"}
       init={{
         ...initialSettings,
         skin: useDarkMode ? 'oxide-dark' : 'oxide',
