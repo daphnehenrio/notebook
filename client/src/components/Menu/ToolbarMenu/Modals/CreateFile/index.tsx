@@ -1,7 +1,7 @@
 // ? Import NPM
 import * as React from 'react';
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // | Material Components
 import IconButton from '@mui/material/IconButton';
@@ -13,6 +13,9 @@ import Button from '@mui/material/Button';
 
 // | Material Icons
 import CreateIcon from '@mui/icons-material/Create';
+
+// ? Import Local
+import { actionCreateDocument } from '../../../../../actions/documents';
 
 // ? Styles
 import './styles.scss';
@@ -38,16 +41,29 @@ interface IFormInput {
 }
 
 const CreateFile = () => {
+  // ? Hooks
+  const dispatch = useDispatch();
+
+  // ? Data from store
   const folders = useSelector((state: any) => state.folders.allFolders);
 
+  // ? State
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
+  // ? Form
   const { control, handleSubmit, formState: { errors } } = useForm<IFormInput>();
 
+  // ? Handlers
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const onSubmit: SubmitHandler<IFormInput> = data => {
     console.log(data)
+    const { name, folder } = data
+    const document = {
+      title: name,
+      folderId: folder?.value,
+    }
+    dispatch(actionCreateDocument(document));
     handleClose();
   };
 
@@ -84,7 +100,7 @@ const CreateFile = () => {
                 <label htmlFor="folder">Dossier : </label>
                 <Select 
                   {...field} 
-                  options={folders.map((folder: { name: any; id: any; }) => ({ label: folder.name, value: folder.id }))} 
+                  options={folders.map((folder: { name: any; _id: any; }) => ({ label: folder.name, value: folder._id }))} 
                 />
               </>}
             />

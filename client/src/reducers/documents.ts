@@ -34,7 +34,7 @@ export default (state = initialState, action: {
 } = {}) => {
   switch (action.type) {
     case GET_ALL_DOCUMENTS: {
-      const documents = action.payload.documents;
+      const { documents } = action.payload;
       if (!documents) {
         return state;
       }
@@ -45,7 +45,7 @@ export default (state = initialState, action: {
       };
     }
     case GET_ONE_DOCUMENT: {
-      const document = action.payload.document;
+      const { document } = action.payload;
       if (!document) {
         return state;
       }
@@ -55,7 +55,7 @@ export default (state = initialState, action: {
       };
     }
     case CREATE_DOCUMENT: {
-      const document = action.payload.document;
+      const { document } = action.payload;
       if (!document) {
         return state;
       }
@@ -66,7 +66,7 @@ export default (state = initialState, action: {
       };
     }
     case UPDATE_DOCUMENT: {
-      const document = action.payload.data;
+      const { document } = action.payload;
       if (!document) {
         return state;
       }
@@ -85,11 +85,13 @@ export default (state = initialState, action: {
           old: document.old,
           updated: document.updated,
         },
-        currentDocument: state.currentDocument?._id === document.updated?._id ? document.updated : state.currentDocument,
+        currentDocument: state.currentDocument?._id === document.updated?._id 
+          ? document.updated 
+          : state.currentDocument,
       };
     }
     case DELETE_DOCUMENT: {
-      const document = action.payload.document;
+      const { document } = action.payload;
       if (!document) {
         return state;
       }
@@ -104,6 +106,9 @@ export default (state = initialState, action: {
           ...allDocuments.slice(index + 1),
         ],
         documentDeleted: document,
+        currentDocument: state.currentDocument?._id === document._id 
+          ? null 
+          : state.currentDocument,
       };
     }
     default: {

@@ -48,7 +48,7 @@ const mainController = {
 
     // | Get model and get all documents from it and send it
     await getModel(modelName)
-      .find({}).sort({ createdAt: -1 })
+      .find({}).sort({ createdAt: 1 })
       .then((response) => {
         res.status(200).json(response);
       });

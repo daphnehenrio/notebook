@@ -12,6 +12,8 @@ import {
   DELETE_DOCUMENT,
 } from '../../actions/documents';
 
+import { actionGetOneFolder } from '../../actions/folders';
+
 // ? Constants
 // | Utils
 const base_url = process.env.REACT_APP_SERVER_BASE_URL;
@@ -20,7 +22,7 @@ const headers = {
 };
 
 // ? Middleware
-const documentsMiddleware: Middleware = (api: any) => (next: any) => (action: AnyAction) => {
+const documentsMiddleware: Middleware = (store: any) => (next: any) => (action: AnyAction) => {
   switch (action.type) {
     // ? Get all documents
     case GET_ALL_DOCUMENTS: {
@@ -65,6 +67,7 @@ const documentsMiddleware: Middleware = (api: any) => (next: any) => (action: An
             ...action.payload,
             document: res.data,
           }
+          store.dispatch(actionGetOneFolder(res.data.parentId));
           return next(action);
         })
         .catch((err) => {
@@ -81,8 +84,11 @@ const documentsMiddleware: Middleware = (api: any) => (next: any) => (action: An
         .then((res) => {
           action.payload = {
             ...action.payload,
-            data: res.data,
+            document: res.data,
           }
+          console.log(res.data);
+          store.dispatch(actionGetOneFolder(res.data.old.parentId));
+          store.dispatch(actionGetOneFolder(res.data.updated.parentId));
           return next(action);
         })
         .catch((err) => {

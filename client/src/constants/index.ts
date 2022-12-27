@@ -1,5 +1,5 @@
 export default {
   MenuAppBar: {
-    drawerWidth: 260,
+    drawerWidth: 500,
   },
 };

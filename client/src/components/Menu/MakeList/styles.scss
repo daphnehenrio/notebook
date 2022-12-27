@@ -1,0 +1,26 @@
+.MuiCollapse-wrapperInner .MuiAccordion-region .MuiAccordionDetails-root .documentItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: default;
+  &:hover {
+    background-color: transparent;
+  }
+
+  .documentName {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  }
+
+  .ctaDocument {
+    display: flex;
+    flex-direction: row;
+    align-items: center ;
+  }
+}
